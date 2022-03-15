@@ -1,0 +1,35 @@
+.calculator{
+
+    border: 1px solid black;
+    height: 700px;
+    width:500px;
+    margin:30px auto;
+    padding: 15px;
+}
+.screen{
+    min-height: 170px;
+    border:1px solid black;
+    margin-bottom: 15px;
+}
+.buttons{
+    border:1px solid black;
+    height: 500px;
+    display: flex;
+}
+.num button{
+    width: 90px;
+    height: 105px;
+}
+.sym{
+    
+    flex-grow: 1;
+    width: 150px;
+}
+.sym button{
+    width: 130px;
+    height: 64px;
+}
+.calculator button{
+    color: brown;
+   margin: 10px;
+}

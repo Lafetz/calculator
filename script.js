@@ -1,22 +1,51 @@
+let current='';
 let previous='';
-let current=0;
+let operator='';
 let total=0;
 let down=document.querySelector('.bottom')
+let secondOperation=true;
 const buttons=document.querySelectorAll('button');
 buttons.forEach(button=>{
     button.addEventListener('click',()=>{
              let content=button.textContent;
-            previous+=content;
-            down.textContent=previous;
-            evaluate(previous);
+             let contentType=parseInt(content)
+             if(!isNaN(contentType)&&secondOperation){
+                 current+=content;
+          
+             }
+            else if(isNaN(contentType)&&secondOperation){
+                      operator=content;
+                      previous=current;
+                      current='';       
+                      secondOperation=false;        
+                      console.log('second if')
+                
+                      console.log(operator)        
+             }
+           
+            else {
+                current+=content
+                if(isNaN(contentType)) {
+                 console.log('else')
+                      
+                      console.log(current);
+                   
+                       total=operation(previous,operator,current);
+                       secondOperation=true;
+                       console.log(total)
+                }
+                       
+            }
     } 
 )})
 
     
 
 
-function operator(a,b,c){
+function operation(a,b,c){
     let answer=0;
+    a=parseInt(a);
+    c=parseInt(c);
     if(b=='+') answer= add(a,c);
     else if(b=='-') answer= subtract(a,c)
     else if(b=='*') answer= multiply(a,c);
@@ -26,9 +55,8 @@ function operator(a,b,c){
     return answer;
 }
 
-
-
 function add(a,b){
+ 
     return a+b;
 }
 function multiply(a,b){
@@ -40,3 +68,4 @@ function divide(a,b){
 function subtract(a,b){
     return a-b;
 }
+

@@ -1,45 +1,35 @@
-let current='';
-let previous='';
-let operator='';
-let total=0;
-let down=document.querySelector('.bottom')
-let secondOperation=true;
+let inputs=[];
+let numbers='';
+let secondTime=false;
 const buttons=document.querySelectorAll('button');
-buttons.forEach(button=>{
-    button.addEventListener('click',()=>{
-             let content=button.textContent;
-             let contentType=parseInt(content)
-             if(!isNaN(contentType)&&secondOperation){
-                 current+=content;
-          
-             }
-            else if(isNaN(contentType)&&secondOperation){
-                      operator=content;
-                      previous=current;
-                      current='';       
-                      secondOperation=false;        
-                      console.log('second if')
-                
-                      console.log(operator)        
-             }
-           
-            else {
-                current+=content
-                if(isNaN(contentType)) {
-                 console.log('else')
-                      
-                      console.log(current);
-                   
-                       total=operation(previous,operator,current);
-                       secondOperation=true;
-                       console.log(total)
-                }
-                       
-            }
-    } 
-)})
-
+const upperScreen=document.querySelector('.top');
+const downScreen=document.querySelector('.down');
+ buttons.forEach(button => {
+                       button.addEventListener('click',()=>{
+                        let buttonContent=button.textContent;
+                         let classname=button.className;
+                         if(classname=='number') numbers+=buttonContent;
+                         
+                         else if(classname=='operator'){ 
+                                  inputs.push(numbers);
+                                  inputs.push(buttonContent);
+                                  numbers='';
+                                  console.log(inputs);
+                                  if(inputs.length==4){
+                                    inputs[0]=operation(inputs[0],inputs[1],inputs[2]);
+                                    inputs.splice(1,2)
+                                    console.log(inputs)
+                          }
+                                  console.log(inputs);
+                                 
+                         }
+                       })                 
+ });
     
+
+
+
+
 
 
 function operation(a,b,c){

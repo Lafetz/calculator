@@ -13,43 +13,26 @@ const downScreen=document.querySelector('.bottom');
                          console.log(buttonContent)
                          if(classname=='number'||classname=='dot') {
                              numbers+=buttonContent;
-                            
-                              if(fof) downScreen.textContent=`${numbers}`;
-                            if(!fof){
-                                downScreen.textContent=`${downScreen.textContent}${buttonContent}`
-                                fof=true;
-                            }
-                            }
+                            downScreen.textContent= `${previous}${numbers}`
+                            console.log(numbers)
+                         }
                         if(classname=='delete'){
                             if(inputs.length==2&&numbers!=''){
                                 numbers=numbers.slice(0,numbers.length-1);
                                 downScreen.textContent=`${inputs[0]}${inputs[1]}${numbers}`;
-                                console.log(inputs);
                             }
                             else if (inputs.length==2&&!secondTime){
                                 inputs.splice(1)
-                                console.log(inputs);
                                 downScreen.textContent=inputs[0]
-                                
-                              
-                            
                             }
-                             
-                            
-                         }
-                                
+                                                        
+                         }          
                         
                         if(classname=='equal'){
-                                           if(inputs.length==2&&numbers!=''){
-                                               upperScreen.textContent=operation(inputs[0],inputs[1],numbers);
-                                               secondTime=true;
-                                               downScreen.textContent='';
-                                           }
-                                           else {
-                                            upperScreen.textContent=inputs[0];
-                                            downScreen.textContent='';
-                                        }
-                                           }
+                                           previous=operation(inputs[0],inputs[1],numbers);
+                                               
+                                               downScreen.textContent=previous;
+                        }
                         
                         if(classname=='clear'){
                             clear();
@@ -58,35 +41,28 @@ const downScreen=document.querySelector('.bottom');
                          else if(classname=='operator'){ 
                             if(numbers!='') inputs.push(numbers);
                             
-                                 
-                                  inputs.push(buttonContent);
-                               
-                                  downScreen.textContent=`${downScreen.textContent}${buttonContent}`;
-                                  fof=false;
+                            if(inputs[1]!=('+'||'-'||'*'||'/')||numbers.length>0){
+                                inputs.push(buttonContent);
+                                  downScreen.textContent=`${numbers}${buttonContent}`;
                                   numbers='';
-                                
+                                previous=downScreen.textContent;
                                   console.log(inputs);
                                   if(inputs.length==4){
                                     inputs[0]=operation(inputs[0],inputs[1],inputs[2]);
                                     inputs.splice(1,2)
                                     console.log(inputs)
-                                    upperScreen.textContent=`${inputs[0]}${inputs[1]}`;
+                                    
                                   secondTime=true;
                                     numbers=''
-                                    previous='';
-                                    downScreen.textContent='';
+                                    previous=`${inputs[0]}${buttonContent}`;
+                                    downScreen.textContent=`${inputs[0]}${buttonContent}`;
                                  }
                                 }
-                       })               
-                          
-                                 // console.log(inputs);
-                                 
-                                
- });
-    
-
-
-
+                         }
+                        
+                         } )             
+                            
+ });    
 function clear(){
     inputs=[];
     numbers='';

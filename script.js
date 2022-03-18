@@ -4,7 +4,6 @@ let previous='';
 let secondTime=false;
 let fof=true;
 const buttons=document.querySelectorAll('button');
-const upperScreen=document.querySelector('.top');
 const downScreen=document.querySelector('.bottom');
  buttons.forEach(button => {
                        button.addEventListener('click',()=>{
@@ -14,16 +13,11 @@ const downScreen=document.querySelector('.bottom');
                          if(classname=='number'||classname=='dot') {
                              numbers+=buttonContent;
                             downScreen.textContent= `${previous}${numbers}`
-                            console.log(numbers)
                          }
                         if(classname=='delete'){
                             if(inputs.length==2&&numbers!=''){
                                 numbers=numbers.slice(0,numbers.length-1);
                                 downScreen.textContent=`${inputs[0]}${inputs[1]}${numbers}`;
-                            }
-                            else if (inputs.length==2&&!secondTime){
-                                inputs.splice(1)
-                                downScreen.textContent=inputs[0]
                             }
                                                         
                          }          
@@ -46,12 +40,9 @@ const downScreen=document.querySelector('.bottom');
                                   downScreen.textContent=`${numbers}${buttonContent}`;
                                   numbers='';
                                 previous=downScreen.textContent;
-                                  console.log(inputs);
                                   if(inputs.length==4){
                                     inputs[0]=operation(inputs[0],inputs[1],inputs[2]);
                                     inputs.splice(1,2)
-                                    console.log(inputs)
-                                    
                                   secondTime=true;
                                     numbers=''
                                     previous=`${inputs[0]}${buttonContent}`;
@@ -68,7 +59,7 @@ function clear(){
     numbers='';
     previous='';
     downScreen.textContent='';
-    upperScreen.textContent='';
+    
 }     
 
 function operation(a,b,c){
